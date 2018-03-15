@@ -57,45 +57,90 @@ class App1 extends Component {
 
 
 
-// ham button 
+// ham demo phan event  
 
 class App2 extends Component {
-  show_info = () => {
-    alert("hello");
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      cheDoSua :false 
+    }
   }
+  
+  chuyenCheDoNut = () => {this.setState({chedoSua:false});}
+  chuyenCheDoSua = () => {
+    alert("sua di ");
+    this.setState({cheDoSua:true});}
+
+  show_info = (noidung) => {
+    alert(noidung); // 6 cai component 
+  }
+
+  hienForm = () => (
+    <form className="form-inline">
+      <div className="form-group">
+        <label htmlFor />
+        <input type="text" name="r" className="form-control" placeholder="Ten " />
+        <small id="helpId" className="text-muted">Help text</small>
+        <button className="btn btn-primary btn-block" onClick={()=>this.chuyenCheDoNut()}  > Save </button>
+
+      </div>
+    </form>
+  );
+
+  hienNut = () => (
+    <div className="btn-group">
+      <button className="btn btn-info" onClick={()=>this.chuyenCheDoSua()}> Edit </button>
+      <button className="btn btn-success" onClick={() => this.show_info()}> Removee </button>
+      {/* <div className="btn btn-danger" onClick={this.show_info.bind(this,this.props.gia)}>Remove </div> */}
+    </div>
+  );
+
+  hamHienNut = () => {
+    if(this.state.cheDoSua === false){
+      return this.hienNut()
+    }
+    else {
+      return this.hienForm()
+    }
+  }
+
   render() {
     return (
+      <div className="col-4">
       <div className="card text-left">
-      <img className="card-img-top" src="http://placehold.it/700x400" alt />
+      <img className="card-img-top" src="http://placehold.it/700x400"   />
       <div className="card-body">
         <h4 className="card-title">Title</h4>
         <p className="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab temporibus architecto, quas est harum porro ducimus maiores dicta ullam vitae hic dolore nihil beatae, asperiores deserunt quos tempore, minus fugit!</p>
-        <div className="btn-group">
-          <div className="btn btn-info" onclick={this.show_info()}> Edit </div>
-          <div className="btn btn-danger">Remove </div>
-        </div>
+        {
+          this.hamHienNut()
+        }
+
       </div>
+    </div>
     </div>
     );
   }
 }
 
+// demo phan state  
+ 
 
+
+
+// end demo state 
 class App extends Component {
+  
   
   render() {
     return (
-      <div className="App">
-{/*          
-       {CacSanPham}
-       {n2} */}
-      <App2/>
-      <App2/>
-      <App2/>
-      <App2/>
-
-        
+      <div className="container">
+       <div className="row">
+         <App2 gia="900"/>
       </div>
+    </div>
     );
   }
 }
